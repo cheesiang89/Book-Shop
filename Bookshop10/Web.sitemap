@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="root.aspx" title="root"  description="root">
+      <siteMapNode url="default.aspx" title="Category"  description="Category">
+        <siteMapNode url="dummy.aspx" title="Children"  description="Children" />
+        <siteMapNode url="dummy2.aspx" title="Technical"  description="Technical" />
+           </siteMapNode> 
+        <siteMapNode url="Membership.aspx" title="Membership"  description="Membership" />
+      <siteMapNode url="https://www.lazada.sg/contact/" title="Contact us"  description="Contact us" />
+      <siteMapNode url="https://www.lazada.sg/helpcenter/" title="Help"  description="Help" />
+    </siteMapNode>
+</siteMap>

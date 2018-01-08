@@ -1,0 +1,105 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="master.master.cs" Inherits="Bookshop10.master" %>
+
+<!DOCTYPE html>
+<script runat="server">
+    protected void homeLogo_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("Default.aspx");
+    }
+
+    protected void cartImage_Click(object sender, ImageClickEventArgs e)
+    {
+        if (Session["BookID"] == null)
+        {
+            Response.Redirect("default.aspx");
+        }
+        else
+        {
+            Response.Redirect("CartPage.aspx");
+        }
+
+    }
+    protected void loginImage_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("login.aspx");
+    }
+    protected void logout_Click(object sender, ImageClickEventArgs e)
+    {
+        FormsAuthentication.SignOut();
+        Response.Redirect("Default.aspx");
+    }
+
+    protected void lblIdentity_load(object sender, EventArgs e)
+    {
+               string id = HttpContext.Current.User.Identity.Name.ToString();
+        username.Text = id;
+    }
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+    <%-- Bootstrap --%>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <!-- Latest compiled JavaScript -->
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+    <link href="style/styles.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <div id="banner1" class="row">
+                <asp:AdRotator ID="AdRotator1" runat="server" DataSourceID="XmlDataSource1" />
+                <asp:XmlDataSource ID="XmlDataSource1" runat="server" DataFile="~/adRotator.xml"></asp:XmlDataSource>
+            </div>
+
+            <div id="banner2" class="row">
+                <asp:ImageButton ID="homeLogo" runat="server" ImageUrl="~/images/book.png"
+                    CssClass="col" Height="90px" Width="90px" OnClick="homeLogo_Click" />
+
+                <asp:ImageButton ID="logout" runat="server" ImageUrl="~/images/log-out.png"
+                    CssClass="col icon" Width="50px" OnClick="logout_Click" />
+                    <asp:ImageButton ID="loginImage" runat="server" ImageUrl="~/images/login2.png"
+                    CssClass="col icon" Width="50px" OnClick="loginImage_Click" />
+                <asp:ImageButton ID="cartImage" runat="server" ImageUrl="~/images/cart1.png"
+                    CssClass="col icon" Width="50px" OnClick="cartImage_Click" />
+                <asp:Label ID="username" runat="server" OnLoad="lblIdentity_load" Text="" CssClass="col icon" ForeColor="White"></asp:Label>
+
+
+            </div>
+            <div id="banner3" class="row">
+                <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1"
+                    Orientation="Horizontal"
+                     
+                    DynamicMenuStyle-BackColor="#FF6600" StaticMenuItemStyle-ForeColor="#2ED3C3">
+                    <StaticMenuItemStyle Font-Bold="true" VerticalPadding="10" HorizontalPadding="15" /> 
+        <DynamicHoverStyle ForeColor="#089386" Font-Bold="True" /> 
+        <DynamicMenuStyle  BackColor="" horizontalpadding="15"/> 
+        <DynamicMenuItemStyle VerticalPadding="2" /> 
+        <StaticHoverStyle Font-Bold="True" ForeColor="#089386" /> 
+                </asp:Menu>
+                
+                <br />
+                <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />
+
+            </div>
+            <div>
+                <br /><br />
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
